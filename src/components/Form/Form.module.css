@@ -1,0 +1,157 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 120px 0 0 256px;
+}
+
+.mainTitle {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 38px;
+  margin: 0;
+  color: #262626;
+}
+
+.subscribeTitle {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 38px;
+  color: #262626;
+  margin: 48px 0 24px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2px 80px 48px 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  font-family: sans-serif;
+  color: #262626;
+}
+
+.input {
+  display: flex;
+}
+
+.genderLabel {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 38px;
+  font-family: sans-serif;
+  color: #262626;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.genderInputsWrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.genderWrapper {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  font-family: sans-serif;
+  color: #262626;
+  margin-right: 108px;
+}
+
+.resumeInput {
+  display: flex;
+  min-width: 256px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.resumeLabel {
+  width: 256px;
+  border-radius: 2px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #f5f5f5;
+  border: 1px dashed #d9d9d9;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  font-family: sans-serif;
+}
+
+.resumeImg {
+  margin-right: 44px;
+}
+
+.resumeWrapper {
+  margin-top: 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.privacyInput {
+  display: flex;
+}
+
+.checkBoxInput {
+  width: 16px;
+}
+
+.privacyPolicyLabel {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  font-family: sans-serif;
+  color: #595959;
+  margin-right: 15px;
+}
+
+.privacyPolicyButton {
+  color: #2196f3;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.validClass {
+  color: black;
+  min-width: 256px;
+}
+
+.invalidClass {
+  color: red;
+  min-width: 256px;
+}
+
+.invalidMsgClass {
+  color: #f5222d;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  font-family: sans-serif;
+}
+
+.submitButton {
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid #d9d9d9;
+  min-width: 360px;
+  min-height: 40px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: sans-serif;
+  margin: 48px 0 88px;
+}
