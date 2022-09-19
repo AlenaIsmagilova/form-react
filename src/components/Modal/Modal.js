@@ -6,7 +6,7 @@ import closeButton from "../../images/Vector.svg";
 
 const ModalRoot = document.getElementById("react-modals");
 
-const Modal = ({ open, handleClose, handleChangeForCheckbox, title }) => {
+const Modal = ({ open, handleClose, handleChangeForCheckbox }) => {
   const closeOnEscKey = (e) => (e.key === "Escape" ? handleClose() : null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Modal = ({ open, handleClose, handleChangeForCheckbox, title }) => {
             <div className={styles.closeBtnWrapper} onClick={handleClose}>
               <img src={closeButton} alt="кнопка закрытия" />
             </div>
-            <h2>{title}</h2>
+            <h2>Политика конфиденциальности</h2>
             <div className={styles.wrapperForScroll}>
               <div className={styles.modalContent}>
                 1. Общие положения Настоящая политика обработки персональных

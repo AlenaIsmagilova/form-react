@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../Form/Form.module.css";
 import addedButton from "../../images/plus.svg";
 import Modal from "../Modal/Modal";
+import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
 const Form = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -12,7 +13,8 @@ const Form = () => {
     resume: { value: "" },
     privacyPolicy: { value: false },
   });
-  const [openModal, setOpenModal] = useState(false);
+  const [openPrivacyPolicyModal, setOpenPtivacyPolicyModal] = useState(false);
+  const [openFeedbackModal, setOpenFeedBackModal] = useState(false);
   const [isTryToSubmit, setIsTryToSubmit] = useState(false);
 
   const handleChange = (e) => {
@@ -44,17 +46,10 @@ const Form = () => {
     });
   };
 
-  const closeModal = () => {
-    setOpenModal(false);
-  };
-
-  const handleOpen = () => {
-    setOpenModal(true);
-  };
-
   const onClick = (e) => {
     e.preventDefault();
     setIsTryToSubmit(true);
+    setOpenFeedBackModal(true);
   };
 
   return (
@@ -221,7 +216,7 @@ const Form = () => {
             * Я согласен c{" "}
             <button
               type="button"
-              onClick={handleOpen}
+              onClick={() => setOpenPtivacyPolicyModal(true)}
               className={styles.privacyPolicyButton}
             >
               политикой конфиденциальности
@@ -238,11 +233,15 @@ const Form = () => {
         </button>
       </form>
       <Modal
-        open={openModal}
-        handleClose={closeModal}
+        open={openPrivacyPolicyModal}
+        handleClose={() => setOpenPtivacyPolicyModal(false)}
         handleChangeForCheckbox={handleChangeForCheckbox}
-        title="Политика конфиденциальности"
       ></Modal>
+      <FeedbackModal
+        open={openFeedbackModal}
+        handleClose={() => setOpenFeedBackModal(false)}
+        candidateName={inputsValue.firstname.value}
+      ></FeedbackModal>
     </>
   );
 };
