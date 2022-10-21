@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/form-react/static/css/main.da2e1319.css",
+    "main.js": "/form-react/static/js/main.bd109a82.js",
+    "static/media/Vector.svg": "/form-react/static/media/Vector.7282cbe9bdd3ec07b64823a1861607d3.svg",
+    "index.html": "/form-react/index.html",
+    "static/media/plus.svg": "/form-react/static/media/plus.cb74041d82975b6e69aa01ad3b3475bc.svg",
+    "main.da2e1319.css.map": "/form-react/static/css/main.da2e1319.css.map",
+    "main.bd109a82.js.map": "/form-react/static/js/main.bd109a82.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da2e1319.css",
+    "static/js/main.bd109a82.js"
+  ]
+}
