@@ -4,3 +4,5 @@
 
 _Стек:_
 React
+
+**Deploy** [https://alenaismagilova.github.io/form-react/]
