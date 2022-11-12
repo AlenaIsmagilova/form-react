@@ -9,9 +9,9 @@ const Form = () => {
     firstname: { value: "", validity: false, touched: false },
     secondname: { value: "", validity: false, touched: false },
     email: { value: "", validity: false, touched: false },
-    gender: { value: "" },
-    resume: { value: "" },
-    privacyPolicy: { value: false },
+    gender: { value: "", validity: false },
+    resume: { value: "", validity: false },
+    privacyPolicy: { value: false, validity: false },
   });
   const [openPrivacyPolicyModal, setOpenPtivacyPolicyModal] = useState(false);
   const [openFeedbackModal, setOpenFeedBackModal] = useState(false);
@@ -46,10 +46,22 @@ const Form = () => {
     });
   };
 
+  const isFormInvalid = () => {
+    return Object.values(inputsValue)
+      .map(function (elem) {
+        return elem.validity;
+      })
+      .includes(false);
+  };
+
   const onClick = (e) => {
     e.preventDefault();
     setIsTryToSubmit(true);
-    setOpenFeedBackModal(true);
+    if (isFormInvalid()) {
+      return;
+    } else {
+      setOpenFeedBackModal(true);
+    }
   };
 
   return (
