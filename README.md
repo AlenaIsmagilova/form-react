@@ -1,8 +1,8 @@
 # Форма для соискателей
 
-## Форма дорабатывается
+### Форма с валидацией на стороне клиента. Использованы различные типы инпутов.
 
 _Стек:_
 React
 
-[**Deploy**](https://alenaismagilova.github.io/form-react/)
+[**Деплой**](https://alenaismagilova.github.io/form-react/)
