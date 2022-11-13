@@ -33,7 +33,10 @@ const Form = () => {
   const handleChangeForCheckbox = () => {
     setInputsValue((prev) => ({
       ...prev,
-      privacyPolicy: { value: !inputsValue.privacyPolicy.value },
+      privacyPolicy: {
+        value: !inputsValue.privacyPolicy.value,
+        validity: !inputsValue.privacyPolicy.value,
+      },
     }));
   };
 
@@ -244,11 +247,13 @@ const Form = () => {
         </div>
         <Button
           title="Отправить"
-          className={`${
-            isFormInvalid()
-              ? buttonStyles.submitButtonInactive
-              : buttonStyles.submitButtonActive
-          }`}
+          disabled={isFormInvalid()}
+          // className={`${
+          //   isFormInvalid()
+          //     ? buttonStyles.submitButtonInactive
+          //     : buttonStyles.submitButtonActive
+          // }`}
+          className={buttonStyles.submitButton}
         />
       </form>
       <Modal
