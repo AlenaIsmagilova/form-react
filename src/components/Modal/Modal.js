@@ -27,9 +27,13 @@ const Modal = ({ open, handleClose, handleChangeForCheckbox }) => {
         <ModalOverlay onClick={handleClose}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.closeBtnWrapper} onClick={handleClose}>
-              <img src={closeButton} alt="кнопка закрытия" />
+              <img
+                className={styles.closeIcon}
+                src={closeButton}
+                alt="кнопка закрытия"
+              />
             </div>
-            <h2>Политика конфиденциальности</h2>
+            <h2 className={styles.modalTitle}>Политика конфиденциальности</h2>
             <div className={styles.wrapperForScroll}>
               <div className={styles.modalContent}>
                 1. Общие положения Настоящая политика обработки персональных

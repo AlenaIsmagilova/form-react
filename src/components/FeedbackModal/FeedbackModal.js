@@ -1,6 +1,6 @@
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ReactDOM from "react-dom";
-import styles from "../Modal/Modal.module.css";
+import styles from "./FeedbackModal.module.css";
 import React, { useEffect } from "react";
 import closeButton from "../../images/Vector.svg";
 
@@ -22,10 +22,14 @@ const FeedbackModal = ({ open, handleClose, candidateName }) => {
         <ModalOverlay onClick={handleClose}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.closeBtnWrapper} onClick={handleClose}>
-              <img src={closeButton} alt="кнопка закрытия" />
+              <img
+                className={styles.closeIcon}
+                src={closeButton}
+                alt="кнопка закрытия"
+              />
             </div>
-            <h2>Cпасибо,{` ${candidateName}`}</h2>
-            <div className={styles.modalContent}>Мы скоро свяжемся с вами</div>
+            <h2 className={styles.modalTitle}>Cпасибо,{` ${candidateName}`}</h2>
+            <p className={styles.modalContent}>Мы скоро свяжемся с вами</p>
             <button
               className={styles.agreeButton}
               type="button"

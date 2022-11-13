@@ -1,0 +1,27 @@
+.submitButtonInactive {
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid #d9d9d9;
+  min-width: 360px;
+  min-height: 40px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: sans-serif;
+  margin: 48px 0 88px;
+  color: #bcbcbc;
+}
+
+.submitButtonActive {
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid #d9d9d9;
+  min-width: 360px;
+  min-height: 40px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: sans-serif;
+  margin: 48px 0 88px;
+  background: #1890ff;
+  color: #ffffff;
+  cursor: pointer;
+}

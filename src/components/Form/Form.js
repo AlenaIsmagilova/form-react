@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "../Form/Form.module.css";
+import buttonStyles from "../Button/Button.module.css";
 import addedButton from "../../images/plus.svg";
 import Modal from "../Modal/Modal";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
+import Button from "../Button/Button";
 
 const Form = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -11,7 +13,7 @@ const Form = () => {
     email: { value: "", validity: false, touched: false },
     gender: { value: "", validity: false },
     resume: { value: "", validity: false },
-    privacyPolicy: { value: false, validity: false },
+    privacyPolicy: { value: false, validity: false, touched: false },
   });
   const [openPrivacyPolicyModal, setOpenPtivacyPolicyModal] = useState(false);
   const [openFeedbackModal, setOpenFeedBackModal] = useState(false);
@@ -54,7 +56,7 @@ const Form = () => {
       .includes(false);
   };
 
-  const onClick = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     setIsTryToSubmit(true);
     if (isFormInvalid()) {
@@ -66,7 +68,7 @@ const Form = () => {
 
   return (
     <>
-      <form className={styles.form} noValidate onSubmit={onClick}>
+      <form className={styles.form} noValidate onSubmit={onSubmit}>
         <h1 className={styles.mainTitle}>Анкета соискателя</h1>
         <h2 className={styles.subscribeTitle}>Личные данные</h2>
         <div className={styles.input}>
@@ -236,13 +238,18 @@ const Form = () => {
           </label>
           <span className={styles.invalidMsgClass}>
             {!inputsValue.privacyPolicy.value && isTryToSubmit
-              ? "Пожалуйста, укажите свое согласие"
+              ? "Пожалуйста, поставьте галочку"
               : ""}
           </span>
         </div>
-        <button type="submit" className={styles.submitButton}>
-          Отправить
-        </button>
+        <Button
+          title="Отправить"
+          className={`${
+            isFormInvalid()
+              ? buttonStyles.submitButtonInactive
+              : buttonStyles.submitButtonActive
+          }`}
+        />
       </form>
       <Modal
         open={openPrivacyPolicyModal}
