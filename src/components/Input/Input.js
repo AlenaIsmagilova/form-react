@@ -20,8 +20,10 @@ const Input = ({
         required={required}
         {...restProps}
       />
-      {isInvalid && (
+      {isInvalid ? (
         <span className={styles.invalidMsgClass}>{invalidMsg}</span>
+      ) : (
+        <span className={styles.validClass}></span>
       )}
     </label>
   );

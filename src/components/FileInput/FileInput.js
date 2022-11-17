@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "../Input/Input.module.css";
 
-const FileInput = (props) => {
+const FileInput = ({ isInvalid = false, invalidMsg, ...rest }) => {
   return (
     <>
-      <input {...props} />
-      {props.isInvalid && (
-        <span className={styles.invalidMsgClass}>{props.invalidMsg}</span>
+      <input {...rest} />
+      {isInvalid ? (
+        <span className={styles.invalidMsgClass}>{invalidMsg}</span>
+      ) : (
+        <span className={styles.validClass}></span>
       )}
     </>
   );

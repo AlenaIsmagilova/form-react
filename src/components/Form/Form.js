@@ -47,7 +47,9 @@ const Form = () => {
       ...inputsValue,
       [e.target.name]: {
         ...inputsValue[e.target.name],
+        value: e.target.value,
         touched: true,
+        validity: e.target.validity.valid,
       },
     });
   };
@@ -115,10 +117,9 @@ const Form = () => {
             invalidMsg={"В имени могут быть только буквы"}
             required={true}
             isInvalid={
-              (!inputsValue.firstname.validity && isTryToSubmit) ||
-              (inputsValue.firstname.touched && !inputsValue.firstname.validity)
-                ? "В имени могут быть только буквы"
-                : ""
+              (!inputsValue.firstname.value && isTryToSubmit) ||
+              (inputsValue.firstname.touched && !inputsValue.firstname.value) ||
+              (inputsValue.firstname.value && !inputsValue.firstname.validity)
             }
           />
           <Input
@@ -139,9 +140,10 @@ const Form = () => {
             pattern="[A-Za-zА-Яа-яЁё]*"
             invalidMsg="В имени могут быть только буквы"
             isInvalid={
-              (!inputsValue.secondname.validity && isTryToSubmit) ||
+              (!inputsValue.secondname.value && isTryToSubmit) ||
               (inputsValue.secondname.touched &&
-                !inputsValue.secondname.validity)
+                !inputsValue.secondname.value) ||
+              (inputsValue.secondname.value && !inputsValue.secondname.validity)
             }
             required={true}
           />
@@ -163,8 +165,9 @@ const Form = () => {
             onBlur={handleValid}
             invalidMsg="Пожалуйста, укажите электронную почту"
             isInvalid={
-              (!inputsValue.email.validity && isTryToSubmit) ||
-              (inputsValue.email.touched && !inputsValue.email.validity)
+              (!inputsValue.email.value && isTryToSubmit) ||
+              (inputsValue.email.touched && !inputsValue.email.value) ||
+              (inputsValue.email.value && !inputsValue.email.validity)
             }
             required={true}
           />
@@ -177,6 +180,9 @@ const Form = () => {
               placeholder="Загрузить резюме"
               className={styles.resumeInput}
               onChange={handleChangeForFileInput}
+              isInvalid={inputsValue.resume.value.length === 0 && isTryToSubmit}
+              invalidMsg="Пожалуйста, загрузите резюме"
+              required={true}
             />
             {inputsValue.resume.value ? (
               <label htmlFor="resume" className={styles.resumeLabel}>
