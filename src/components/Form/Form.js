@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "../Form/Form.module.css";
 import buttonStyles from "../Button/Button.module.css";
 import addedButton from "../../images/plus.svg";
 import Modal from "../Modal/Modal";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import Button from "../Button/Button";
+import Input from "../Input/Input";
+import FileInput from "../FileInput/FileInput";
 
 const Form = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -19,12 +21,32 @@ const Form = () => {
   const [openFeedbackModal, setOpenFeedBackModal] = useState(false);
   const [isTryToSubmit, setIsTryToSubmit] = useState(false);
 
+  const handleChangeForFileInput = (e) => {
+    setInputsValue({
+      ...inputsValue,
+      resume: {
+        validity: true,
+        value: e.target.files[0].name,
+      },
+    });
+  };
+
+  const detachFile = (e) => {
+    e.stopPropagation();
+    setInputsValue({
+      ...inputsValue,
+      resume: {
+        validity: false,
+        value: "",
+      },
+    });
+  };
+
   const handleChange = (e) => {
     setInputsValue({
       ...inputsValue,
       [e.target.name]: {
-        value: e.target.value,
-        validity: e.target.validity.valid,
+        ...inputsValue[e.target.name],
         touched: true,
       },
     });
@@ -75,109 +97,107 @@ const Form = () => {
         <h1 className={styles.mainTitle}>Анкета соискателя</h1>
         <h2 className={styles.subscribeTitle}>Личные данные</h2>
         <div className={styles.input}>
-          <label className={styles.label}>
-            Имя *
-            <input
-              className={`${
-                (!inputsValue.firstname.validity && isTryToSubmit) ||
-                (inputsValue.firstname.touched &&
-                  !inputsValue.firstname.validity)
-                  ? styles.invalidClass
-                  : styles.validClass
-              }`}
-              type="text"
-              name="firstname"
-              placeholder="Имя"
-              value={inputsValue.firstname.value}
-              onChange={handleChange}
-              onBlur={handleValid}
-              required
-              pattern="[A-Za-zА-Яа-яЁё]*"
-            />
-            <span className={styles.invalidMsgClass}>
-              {(!inputsValue.firstname.validity && isTryToSubmit) ||
+          <Input
+            titleForLabel="Имя *"
+            className={`${
+              (!inputsValue.firstname.validity && isTryToSubmit) ||
+              (inputsValue.firstname.touched && !inputsValue.firstname.validity)
+                ? styles.invalidClass
+                : styles.validClass
+            }`}
+            type="text"
+            name="firstname"
+            placeholder="Имя"
+            value={inputsValue.firstname.value}
+            onChange={handleChange}
+            onBlur={handleValid}
+            pattern="[A-Za-zА-Яа-яЁё]*"
+            invalidMsg={"В имени могут быть только буквы"}
+            required={true}
+            isInvalid={
+              (!inputsValue.firstname.validity && isTryToSubmit) ||
               (inputsValue.firstname.touched && !inputsValue.firstname.validity)
                 ? "В имени могут быть только буквы"
-                : ""}
-            </span>
-          </label>
-          <label className={styles.label}>
-            Фамилия *
-            <input
-              className={`${
-                (!inputsValue.secondname.validity && isTryToSubmit) ||
-                (inputsValue.secondname.touched &&
-                  !inputsValue.secondname.validity)
-                  ? styles.invalidClass
-                  : styles.validClass
-              }`}
-              type="text"
-              name="secondname"
-              placeholder="Фамилия"
-              value={inputsValue.secondname.value}
-              onChange={handleChange}
-              onBlur={handleValid}
-              pattern="[A-Za-zА-Яа-яЁё]*"
-              required
-            />
-            <span className={styles.invalidMsgClass}>
-              {(!inputsValue.secondname.validity && isTryToSubmit) ||
+                : ""
+            }
+          />
+          <Input
+            titleForLabel="Фамилия *"
+            className={`${
+              (!inputsValue.secondname.validity && isTryToSubmit) ||
               (inputsValue.secondname.touched &&
                 !inputsValue.secondname.validity)
-                ? "В имени могут быть только буквы"
-                : ""}
-            </span>
-          </label>
+                ? styles.invalidClass
+                : styles.validClass
+            }`}
+            type="text"
+            name="secondname"
+            placeholder="Фамилия"
+            value={inputsValue.secondname.value}
+            onChange={handleChange}
+            onBlur={handleValid}
+            pattern="[A-Za-zА-Яа-яЁё]*"
+            invalidMsg="В имени могут быть только буквы"
+            isInvalid={
+              (!inputsValue.secondname.validity && isTryToSubmit) ||
+              (inputsValue.secondname.touched &&
+                !inputsValue.secondname.validity)
+            }
+            required={true}
+          />
         </div>
         <div className={styles.input}>
-          <label className={styles.label}>
-            Электронная почта *
-            <input
-              className={`${
-                (!inputsValue.email.validity && isTryToSubmit) ||
-                (inputsValue.email.touched && !inputsValue.email.validity)
-                  ? styles.invalidClass
-                  : styles.validClass
-              }`}
-              type="email"
-              name="email"
-              placeholder="Электронная почта"
-              value={inputsValue.email.value}
-              onChange={handleChange}
-              onBlur={handleValid}
-              required
-            />
-            <span className={styles.invalidMsgClass}>
-              {(!inputsValue.email.validity && isTryToSubmit) ||
+          <Input
+            titleForLabel="Электронная почта *"
+            className={`${
+              (!inputsValue.email.validity && isTryToSubmit) ||
               (inputsValue.email.touched && !inputsValue.email.validity)
-                ? "Пожалуйста, укажите электронную почту"
-                : ""}
-            </span>
-          </label>
+                ? styles.invalidClass
+                : styles.validClass
+            }`}
+            type="email"
+            name="email"
+            placeholder="Электронная почта"
+            value={inputsValue.email.value}
+            onChange={handleChange}
+            onBlur={handleValid}
+            invalidMsg="Пожалуйста, укажите электронную почту"
+            isInvalid={
+              (!inputsValue.email.validity && isTryToSubmit) ||
+              (inputsValue.email.touched && !inputsValue.email.validity)
+            }
+            required={true}
+          />
           <div className={styles.resumeWrapper}>
-            <input
+            <FileInput
               type="file"
+              multiple
               id="resume"
               name="resume"
               placeholder="Загрузить резюме"
               className={styles.resumeInput}
-              multiple
-              onChange={handleChange}
-              value={inputsValue.resume.value}
+              onChange={handleChangeForFileInput}
             />
-            <label htmlFor="resume" className={styles.resumeLabel}>
-              <img
-                src={addedButton}
-                alt="кнопка добавления"
-                className={styles.resumeImg}
-              />{" "}
-              Загрузить резюме
-            </label>
-            <span className={styles.invalidMsgClass}>
-              {inputsValue.resume.value.length === 0 && isTryToSubmit
-                ? "Пожалуйста, загрузите резюме"
-                : ""}
-            </span>
+            {inputsValue.resume.value ? (
+              <label htmlFor="resume" className={styles.resumeLabel}>
+                <img
+                  src={addedButton}
+                  alt="кнопка удаления"
+                  className={styles.resumeImgExit}
+                  onClick={detachFile}
+                />
+                {inputsValue.resume.value}
+              </label>
+            ) : (
+              <label htmlFor="resume" className={styles.resumeLabel}>
+                <img
+                  src={addedButton}
+                  alt="кнопка добавления"
+                  className={styles.resumeImg}
+                />
+                Загрузить резюме
+              </label>
+            )}
           </div>
         </div>
         <label className={styles.genderLabel}>
@@ -248,11 +268,6 @@ const Form = () => {
         <Button
           title="Отправить"
           disabled={isFormInvalid()}
-          // className={`${
-          //   isFormInvalid()
-          //     ? buttonStyles.submitButtonInactive
-          //     : buttonStyles.submitButtonActive
-          // }`}
           className={buttonStyles.submitButton}
         />
       </form>

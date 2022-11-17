@@ -94,6 +94,11 @@
   margin-right: 44px;
 }
 
+.resumeImgExit {
+  margin-right: 44px;
+  transform: rotate(45deg);
+}
+
 .resumeWrapper {
   margin-top: 23px;
   display: flex;
