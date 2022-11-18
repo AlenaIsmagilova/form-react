@@ -13,13 +13,13 @@ const Form = () => {
     firstname: { value: "", validity: false, touched: false },
     secondname: { value: "", validity: false, touched: false },
     email: { value: "", validity: false, touched: false },
-    gender: { value: "", validity: false },
-    resume: { value: "", validity: false },
+    githubpage: { value: "" },
+    gender: { value: "", validity: false, touched: false },
+    resume: { value: "", validity: false, touched: false },
     privacyPolicy: { value: false, validity: false, touched: false },
   });
   const [openPrivacyPolicyModal, setOpenPtivacyPolicyModal] = useState(false);
   const [openFeedbackModal, setOpenFeedBackModal] = useState(false);
-  const [isTryToSubmit, setIsTryToSubmit] = useState(false);
 
   const handleChangeForFileInput = (e) => {
     setInputsValue({
@@ -32,6 +32,7 @@ const Form = () => {
   };
 
   const detachFile = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     setInputsValue({
       ...inputsValue,
@@ -85,12 +86,28 @@ const Form = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setIsTryToSubmit(true);
     if (isFormInvalid()) {
       return;
     } else {
       setOpenFeedBackModal(true);
     }
+  };
+
+  const handleCloseFeedbackModal = (e) => {
+    setOpenFeedBackModal(false);
+    setInputsValue({
+      firstname: { value: "" },
+      secondname: { value: "" },
+      email: { value: "" },
+      gender: { value: "" },
+      resume: { value: "" },
+      githubpage: { value: "" },
+      privacyPolicy: { value: false },
+    });
+  };
+
+  const handleClickForFileInput = (e) => {
+    e.target.value = "";
   };
 
   return (
@@ -102,8 +119,7 @@ const Form = () => {
           <Input
             titleForLabel="Имя *"
             className={`${
-              (!inputsValue.firstname.validity && isTryToSubmit) ||
-              (inputsValue.firstname.touched && !inputsValue.firstname.validity)
+              inputsValue.firstname.touched && !inputsValue.firstname.validity
                 ? styles.invalidClass
                 : styles.validClass
             }`}
@@ -117,7 +133,6 @@ const Form = () => {
             invalidMsg={"В имени могут быть только буквы"}
             required={true}
             isInvalid={
-              (!inputsValue.firstname.value && isTryToSubmit) ||
               (inputsValue.firstname.touched && !inputsValue.firstname.value) ||
               (inputsValue.firstname.value && !inputsValue.firstname.validity)
             }
@@ -125,9 +140,7 @@ const Form = () => {
           <Input
             titleForLabel="Фамилия *"
             className={`${
-              (!inputsValue.secondname.validity && isTryToSubmit) ||
-              (inputsValue.secondname.touched &&
-                !inputsValue.secondname.validity)
+              inputsValue.secondname.touched && !inputsValue.secondname.validity
                 ? styles.invalidClass
                 : styles.validClass
             }`}
@@ -140,7 +153,6 @@ const Form = () => {
             pattern="[A-Za-zА-Яа-яЁё]*"
             invalidMsg="В имени могут быть только буквы"
             isInvalid={
-              (!inputsValue.secondname.value && isTryToSubmit) ||
               (inputsValue.secondname.touched &&
                 !inputsValue.secondname.value) ||
               (inputsValue.secondname.value && !inputsValue.secondname.validity)
@@ -152,8 +164,7 @@ const Form = () => {
           <Input
             titleForLabel="Электронная почта *"
             className={`${
-              (!inputsValue.email.validity && isTryToSubmit) ||
-              (inputsValue.email.touched && !inputsValue.email.validity)
+              inputsValue.email.touched && !inputsValue.email.validity
                 ? styles.invalidClass
                 : styles.validClass
             }`}
@@ -165,7 +176,6 @@ const Form = () => {
             onBlur={handleValid}
             invalidMsg="Пожалуйста, укажите электронную почту"
             isInvalid={
-              (!inputsValue.email.value && isTryToSubmit) ||
               (inputsValue.email.touched && !inputsValue.email.value) ||
               (inputsValue.email.value && !inputsValue.email.validity)
             }
@@ -180,7 +190,11 @@ const Form = () => {
               placeholder="Загрузить резюме"
               className={styles.resumeInput}
               onChange={handleChangeForFileInput}
-              isInvalid={inputsValue.resume.value.length === 0 && isTryToSubmit}
+              onClick={handleClickForFileInput}
+              isInvalid={
+                inputsValue.resume.value.length === 0 &&
+                inputsValue.resume.touched
+              }
               invalidMsg="Пожалуйста, загрузите резюме"
               required={true}
             />
@@ -209,7 +223,7 @@ const Form = () => {
         <label className={styles.genderLabel}>
           Пол *
           <span className={styles.invalidMsgClass}>
-            {inputsValue.gender.value.length === 0 && isTryToSubmit
+            {inputsValue.gender.value.length === 0 && inputsValue.gender.touched
               ? "Пожалуйста, укажите пол"
               : ""}
           </span>
@@ -243,6 +257,8 @@ const Form = () => {
             className={styles.validClass}
             type="text"
             name="link"
+            value={inputsValue.githubpage.value}
+            onChange={handleChange}
             placeholder="Вставьте ссылку на Github"
           />
         </label>
@@ -266,7 +282,8 @@ const Form = () => {
             </button>
           </label>
           <span className={styles.invalidMsgClass}>
-            {!inputsValue.privacyPolicy.value && isTryToSubmit
+            {!inputsValue.privacyPolicy.value &&
+            inputsValue.privacyPolicy.touched
               ? "Пожалуйста, поставьте галочку"
               : ""}
           </span>
@@ -284,7 +301,7 @@ const Form = () => {
       ></Modal>
       <FeedbackModal
         open={openFeedbackModal}
-        handleClose={() => setOpenFeedBackModal(false)}
+        handleClose={() => handleCloseFeedbackModal()}
         candidateName={inputsValue.firstname.value}
       ></FeedbackModal>
     </>
