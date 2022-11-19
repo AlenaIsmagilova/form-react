@@ -140,6 +140,7 @@ const Form = () => {
             invalidMsg={"В имени могут быть только буквы"}
             required={true}
             isInvalid={
+              (!inputsValue.firstname.validity && isTryToSubmit) ||
               (inputsValue.firstname.touched && !inputsValue.firstname.value) ||
               (inputsValue.firstname.value && !inputsValue.firstname.validity)
             }
@@ -160,6 +161,7 @@ const Form = () => {
             pattern="[A-Za-zА-Яа-яЁё]*"
             invalidMsg="В имени могут быть только буквы"
             isInvalid={
+              (!inputsValue.secondname.validity && isTryToSubmit) ||
               (inputsValue.secondname.touched &&
                 !inputsValue.secondname.value) ||
               (inputsValue.secondname.value && !inputsValue.secondname.validity)
@@ -183,6 +185,7 @@ const Form = () => {
             onBlur={handleValid}
             invalidMsg="Пожалуйста, укажите электронную почту"
             isInvalid={
+              (!inputsValue.email.validity && isTryToSubmit) ||
               (inputsValue.email.touched && !inputsValue.email.value) ||
               (inputsValue.email.value && !inputsValue.email.validity)
             }
@@ -227,7 +230,9 @@ const Form = () => {
         <label className={styles.genderLabel}>
           Пол *
           <span className={styles.invalidMsgClass}>
-            {inputsValue.gender.value.length === 0 && inputsValue.gender.touched
+            {(!inputsValue.gender.validity && isTryToSubmit) ||
+            (inputsValue.gender.value.length === 0 &&
+              inputsValue.gender.touched)
               ? "Пожалуйста, укажите пол"
               : ""}
           </span>
