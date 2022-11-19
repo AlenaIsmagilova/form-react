@@ -20,6 +20,7 @@ const Form = () => {
   });
   const [openPrivacyPolicyModal, setOpenPtivacyPolicyModal] = useState(false);
   const [openFeedbackModal, setOpenFeedBackModal] = useState(false);
+  const [isTryToSubmit, setIsTryToSubmit] = useState(false);
 
   const handleChangeForFileInput = (e) => {
     setInputsValue({
@@ -110,6 +111,12 @@ const Form = () => {
     e.target.value = "";
   };
 
+  const handleClickForButtonWrapper = () => {
+    if (isFormInvalid) {
+      setIsTryToSubmit(true);
+    } else return null;
+  };
+
   return (
     <>
       <form className={styles.form} noValidate onSubmit={onSubmit}>
@@ -191,10 +198,7 @@ const Form = () => {
               className={styles.resumeInput}
               onChange={handleChangeForFileInput}
               onClick={handleClickForFileInput}
-              isInvalid={
-                inputsValue.resume.value.length === 0 &&
-                inputsValue.resume.touched
-              }
+              isInvalid={inputsValue.resume.value.length === 0 && isTryToSubmit}
               invalidMsg="Пожалуйста, загрузите резюме"
               required={true}
             />
@@ -282,8 +286,7 @@ const Form = () => {
             </button>
           </label>
           <span className={styles.invalidMsgClass}>
-            {!inputsValue.privacyPolicy.value &&
-            inputsValue.privacyPolicy.touched
+            {!inputsValue.privacyPolicy.value && isTryToSubmit
               ? "Пожалуйста, поставьте галочку"
               : ""}
           </span>
@@ -292,7 +295,12 @@ const Form = () => {
           title="Отправить"
           disabled={isFormInvalid()}
           className={buttonStyles.submitButton}
-        />
+        >
+          <div
+            className={buttonStyles.buttonWrapper}
+            onClick={handleClickForButtonWrapper}
+          ></div>
+        </Button>
       </form>
       <Modal
         open={openPrivacyPolicyModal}
