@@ -38,7 +38,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "node-sass": "^7.0.3"
   },
   "homepage": "https://AlenaIsmagilova.github.io/form-react"
 }

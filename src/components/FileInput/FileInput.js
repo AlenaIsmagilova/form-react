@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../Input/Input.module.css";
+import styles from "../Input/Input.module.scss";
 
 const FileInput = ({ isInvalid = false, invalidMsg, ...rest }) => {
   return (

@@ -1,6 +1,6 @@
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ReactDOM from "react-dom";
-import styles from "./FeedbackModal.module.css";
+import styles from "./FeedbackModal.module.scss";
 import React, { useEffect } from "react";
 import closeButton from "../../images/Vector.svg";
 

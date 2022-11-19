@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "../Form/Form.module.css";
-import buttonStyles from "../Button/Button.module.css";
+import styles from "../Form/Form.module.scss";
+import buttonStyles from "../Button/Button.module.scss";
 import addedButton from "../../images/plus.svg";
 import Modal from "../Modal/Modal";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";

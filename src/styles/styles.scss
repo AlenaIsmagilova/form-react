@@ -1,0 +1,11 @@
+$base-color: black;
+$invalid-color: red;
+$background-color-for-scrollbar: #bcbcbc;
+$background-color-for-button: #1890ff;
+
+@mixin font-styles {
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}

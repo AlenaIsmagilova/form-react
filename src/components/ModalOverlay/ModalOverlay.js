@@ -1,4 +1,4 @@
-import styles from "../ModalOverlay/ModalOverlay.module.css";
+import styles from "../ModalOverlay/ModalOverlay.module.scss";
 
 const ModalOverlay = ({ children, onClick }) => {
   return (
