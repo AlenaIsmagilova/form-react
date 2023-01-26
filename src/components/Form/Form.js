@@ -100,11 +100,12 @@ const Form = () => {
       firstname: { value: "" },
       secondname: { value: "" },
       email: { value: "" },
-      gender: { value: "" },
+      gender: { value: "", validity: false, touched: false },
       resume: { value: "" },
       githubpage: { value: "" },
       privacyPolicy: { value: false },
     });
+    setIsTryToSubmit(false);
   };
 
   const handleClickForFileInput = (e) => {
@@ -242,6 +243,7 @@ const Form = () => {
               name="gender"
               id="genderMale"
               value="Мужской"
+              checked={inputsValue.gender.value === "Мужской"}
               onChange={handleChange}
             />
             <label className={styles.genderWrapper} htmlFor="genderMale">
@@ -252,6 +254,7 @@ const Form = () => {
               name="gender"
               id="genderFemale"
               value="Женский"
+              checked={inputsValue.gender.value === "Женский"}
               onChange={handleChange}
             />
             <label className={styles.genderWrapper} htmlFor="genderFemale">
@@ -265,7 +268,7 @@ const Form = () => {
           <input
             className={styles.validClass}
             type="text"
-            name="link"
+            name="githubpage"
             value={inputsValue.githubpage.value}
             onChange={handleChange}
             placeholder="Вставьте ссылку на Github"
